@@ -1,0 +1,18 @@
+#!/bin/bash
+
+#filename: delete_old_log_files.sh
+
+# Check the list of files older than 200 days
+find /var/log -type f -mtime +200 -print
+
+# Check whether to enter a clear command
+echo "Do you want to delete these files? (y/n)"
+read answer
+
+# Delete on yes
+if [[ $answer == "y" ]]; then
+  rm -f $(find /var/log -type f -mtime +200 -print)
+  echo "Files deleted successfully!"
+else
+  echo "Files not deleted."
+fi
